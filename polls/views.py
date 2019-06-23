@@ -41,9 +41,15 @@ def users(request, user_screenname):
 
           #print(user_attributes[0]['screenname'])
             tweets = Tweet.objects.filter(user=user_attributes[0]['user_id'])
+          tweetordered = tweets.order_by('createdat')
+          if len(tweetordered)>0:
+            age = tweetordered.values()[0]['createdat']
+          else: 
+            age = "0 days"
           return render(request, 'polls/user.html', {
           'tweets': tweets.values(),
           'user': user_attributes[0],
+          'age': age,
           'form': form})
     except User.DoesNotExist:
         raise Http404("Question does not exist")
