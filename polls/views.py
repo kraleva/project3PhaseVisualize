@@ -22,7 +22,7 @@ def users(request, user_screenname):
         raise Http404("Question does not exist")
     return render(request, 'polls/user.html', {
       'tweets': tweets.values(),
-      'user': user_attributes})
+      'user': user_attributes[0]})
 
 
 def tweets(request,user_screenname):

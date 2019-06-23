@@ -1,10 +1,19 @@
-{{user}}
+<form>
+  Search for a user:<br>
+  <input type="text" name="screenname">
+  <input type = "submit" value="Search">
+</form>
+<h2>{{user.screenname}}</h2>
+{% if user.location%}
+  <p>Location: {{user.location}}</p>
+{% endif %}
+<p> ID: {{user.user_id}}</p>
 {% if tweets %}
     <div class="tweet_list">
     <ul>
     {% for tweet in tweets %}
         <div class="user_tweets">    
-        <li><a href="{{ tweet.tweet_id }}/">{{ tweet.tweet }}</a></li>
+        <li><a href="{%url 'tweets' tweet.tweet_id %}">{{ tweet.tweet }}</a></li>
         </div>
     {% endfor %}
     </ul>
