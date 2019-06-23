@@ -1,1 +1,16 @@
 {{user}}
+{% if tweets %}
+    <div class="tweet_list">
+    <ul>
+    {% for tweet in tweets %}
+        <div class="user_tweets">    
+        <li><a href="{{ tweet.tweet_id }}/">{{ tweet.tweet }}</a></li>
+        </div>
+    {% endfor %}
+    </ul>
+    </div>
+{% else %}
+    <div class="tweets">
+    <p>No tweets are available.</p>
+    </div>
+{% endif %}

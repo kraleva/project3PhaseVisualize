@@ -1,9 +1,16 @@
+<h1>List of all users</h1>
 {% if latest_user_list %}
+    <div class="user_list">
     <ul>
     {% for user in latest_user_list %}
+        <div class="user_row">    
         <li><a href="/{{ user.screenname }}/">{{ user.screenname }}</a></li>
+        </div>
     {% endfor %}
     </ul>
+    </div>
 {% else %}
-    <p>No polls are available.</p>
+    <div class="user_list">
+    <p>No users are available.</p>
+    </div>
 {% endif %}
