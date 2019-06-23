@@ -6,12 +6,32 @@
 <form action="http://localhost:8000">
     <input type="submit" value="Go back to users" />
 </form>
+<div class="information">
 <h2>{{user.screenname}}</h2>
 {% if user.location%}
-  <p>Location: {{user.location}}</p>
+  <a>Location: {{user.location}}</a>
+  <br>
 {% endif %}
-<p> ID: {{user.user_id}}</p>
-<p> lastdate: {{age}}</p>
+<a> ID: {{user.user_id}}</a>
+<br>
+<a> lastdate: {{age}}</a>
+<br>
+<a> income: {{user.statuses}}</a>
+</div>
+<div class="fanlist">
+<p>Fans</p>
+{% if followers %}
+    <div class="fan_list">
+    {% for follower in followers %}
+      <li><a href="{%url 'user' follower.screenname %}">{{ follower.screenname}}</a></li>
+    </div>
+    {% endfor %}
+{% else %}
+    <div class="fan_list">
+    <p>No followers yet.</p>
+    </div>
+{% endif %}
+</div>
 {% if tweets %}
     <div class="tweet_list">
     <ul>
