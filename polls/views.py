@@ -11,9 +11,10 @@ def index(request):
     query = request.GET.get('screenname')
     form = NameForm(request.GET)
     if query:
-      latest_user_list = User.objects.filter(screenname=str())
+      latest_user_list = User.objects.filter(screenname=str(query))
       context = {
-        'latest_user_list':latest_user_list,
+        'latest_user_list':[],
+        'searcheduser': latest_user_list,
         'form': form
       }
     else:
