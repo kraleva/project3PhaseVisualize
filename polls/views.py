@@ -4,21 +4,25 @@ from django.http import HttpResponse,Http404
 from .models import User,Tweet
 from django.db.models import Q
 from . forms import NameForm
+from django import forms
 
 def index(request):
   if request.method == 'GET':
-    form = NameForm()
-    latest_user_list = User.objects.all()
-  elif request.method == 'POST':
-    print(request.screenname)
-    form = NameForm(request.POST)
-    latest_user_list = User.objects.filter(screenname = str('smuu'))
-    print(form)
-  context = {
-      'form': form,
-      'latest_user_list':latest_user_list
-    }
-  return render(request,'polls/index.html',context)
+    query = request.GET.get('screenname')
+    form = NameForm(request.GET)
+    if query:
+      latest_user_list = User.objects.filter(screenname=str())
+      context = {
+        'latest_user_list':latest_user_list,
+        'form': form
+      }
+    else:
+      latest_user_list = User.objects.all()
+      context = {
+        'latest_user_list':latest_user_list,
+        'form': form
+      }
+    return render(request,'polls/index.html',context)
 
 def users(request, user_screenname):
     try:
