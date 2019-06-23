@@ -3,6 +3,7 @@ from django.template import loader
 from django.http import HttpResponse,Http404
 from .models import User,Tweet
 from django.db.models import Q
+from .forms import NameForm
 
 def index(request):
   if request.method == 'GET':
@@ -11,6 +12,9 @@ def index(request):
       'latest_user_list':latest_user_list
     }
     return render(request,'polls/index.html',context)
+  elif request.method == 'POST':
+    form = NameForm(request.POST)
+
 
 def users(request, user_screenname):
     try:
