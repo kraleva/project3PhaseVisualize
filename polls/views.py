@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.template import loader
 from django.http import HttpResponse,Http404
 from .models import User,Tweet
@@ -11,7 +11,7 @@ def index(request):
     query = request.GET.get('screenname')
     form = NameForm(request.GET)
     if query:
-      latest_user_list = User.objects.filter(screenname=str(query))
+      latest_user_list = User.objects.filter(screenname__startswith=str(query))
       context = {
         'latest_user_list':[],
         'searcheduser': latest_user_list,
@@ -27,17 +27,26 @@ def index(request):
 
 def users(request, user_screenname):
     try:
-        user = User.objects.filter(screenname=str(user_screenname))
-        user_attributes = user.values()
-        if(len(user_attributes)):
+        query = request.GET.get('screenname')
+        form = NameForm(request.GET)
+        if query:
+          #if do nothing
+          latest_user_list = User.objects.filter(screenname=str(query))
+          if len(latest_user_list)>0:
+            return redirect("http://localhost:8000/"+latest_user_list[0].screenname)
+        else:
+          user = User.objects.filter(screenname=str(user_screenname))
+          user_attributes = user.values()
+          if(len(user_attributes)):
 
-        #print(user_attributes[0]['screenname'])
-          tweets = Tweet.objects.filter(user=user_attributes[0]['user_id'])
+          #print(user_attributes[0]['screenname'])
+            tweets = Tweet.objects.filter(user=user_attributes[0]['user_id'])
+          return render(request, 'polls/user.html', {
+          'tweets': tweets.values(),
+          'user': user_attributes[0],
+          'form': form})
     except User.DoesNotExist:
         raise Http404("Question does not exist")
-    return render(request, 'polls/user.html', {
-      'tweets': tweets.values(),
-      'user': user_attributes[0]})
 
 
 def tweets(request,user_screenname):

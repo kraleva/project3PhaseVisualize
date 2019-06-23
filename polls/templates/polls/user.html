@@ -1,7 +1,10 @@
-<form method="POST">
-  Search for a user:<br>
-  <input type="text" name="screenname">
-  <input type = "submit" value="Search">
+<form  method="GET">
+ {% csrf_token %}
+ {{form}}
+ <input type="submit" value="submit">
+</form>
+<form action="http://localhost:8000">
+    <input type="submit" value="Go back to users" />
 </form>
 <h2>{{user.screenname}}</h2>
 {% if user.location%}
