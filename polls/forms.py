@@ -1,4 +1,4 @@
 from django import forms
 
-class NameForm(foms.Form):
-  screenname = forms.CharField(label="")
+class NameForm(forms.Form):
+  screenname = forms.CharField(label="Search for a user:",max_length=32)

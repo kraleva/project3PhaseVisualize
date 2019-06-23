@@ -1,8 +1,8 @@
 <h1>List of all users</h1>
 <form method="POST">
-  <label for="screenname">Search for a user:</label><br>
-  <input type="text" name="screenname" default="Enter username">
-  <input type = "submit" value="Search">
+ {% csrf_token %}
+ {{form}}
+ <input type="submit" value="submit">
 </form>
 {% if searcheduser %}
   <div class="user_list">

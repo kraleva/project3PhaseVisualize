@@ -3,25 +3,31 @@ from django.template import loader
 from django.http import HttpResponse,Http404
 from .models import User,Tweet
 from django.db.models import Q
-from .forms import NameForm
+from . forms import NameForm
 
 def index(request):
   if request.method == 'GET':
+    form = NameForm()
     latest_user_list = User.objects.all()
-    context = {
+  elif request.method == 'POST':
+    print(request.screenname)
+    form = NameForm(request.POST)
+    latest_user_list = User.objects.filter(screenname = str('smuu'))
+    print(form)
+  context = {
+      'form': form,
       'latest_user_list':latest_user_list
     }
-    return render(request,'polls/index.html',context)
-  elif request.method == 'POST':
-    form = NameForm(request.POST)
-
+  return render(request,'polls/index.html',context)
 
 def users(request, user_screenname):
     try:
         user = User.objects.filter(screenname=str(user_screenname))
         user_attributes = user.values()
-        print(user_attributes[0]['screenname'])
-        tweets = Tweet.objects.filter(user=user_attributes[0]['user_id'])
+        if(len(user_attributes)):
+
+        #print(user_attributes[0]['screenname'])
+          tweets = Tweet.objects.filter(user=user_attributes[0]['user_id'])
     except User.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'polls/user.html', {
