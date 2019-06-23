@@ -5,6 +5,7 @@ from .models import User,Tweet
 from django.db.models import Q
 
 def index(request):
+  if request.method == 'GET':
     latest_user_list = User.objects.all()
     context = {
       'latest_user_list':latest_user_list
