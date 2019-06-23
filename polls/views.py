@@ -5,6 +5,7 @@ from .models import User,Tweet
 from django.db.models import Q
 from . forms import NameForm
 from django import forms
+from datetime import datetime
 
 def index(request):
   if request.method == 'GET':
@@ -43,7 +44,14 @@ def users(request, user_screenname):
             tweets = Tweet.objects.filter(user=user_attributes[0]['user_id'])
           tweetordered = tweets.order_by('createdat')
           if len(tweetordered)>0:
-            age = tweetordered.values()[0]['createdat']
+            borndate = tweetordered.values()[0]['createdat']
+            d0 = datetime.now().date()
+            age = d0 - borndate
+            years = age.days//365
+            if years>0:
+              age = str(years) + " yeaars old"
+            else:
+              age = str(age.days//30 + 1) + " months old"
           else: 
             age = "0 days"
           return render(request, 'polls/user.html', {
