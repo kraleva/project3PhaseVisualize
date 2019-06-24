@@ -6,7 +6,7 @@ from django.db.models import Q
 from . forms import NameForm
 from django import forms
 from datetime import datetime
-from . getuserdata import getTweets,getDate, getFans,getDates, getMarrige
+from . getuserdata import getTweets,getDate, getFans,getDates, getMarrige,getTweet
 
 def index(request):
   if request.method == 'GET':
@@ -56,9 +56,12 @@ def users(request, user_screenname):
         raise Http404("Question does not exist")
 
 
-def tweets(request,user_screenname):
-    response = "You're looking at the tweets of user %s."
-    return HttpResponse(response % user_screenname)
+def tweet(request,user_screenname,tweet_id):
+    tweet = getTweet(tweet_id)
+    return render(request,'polls/tweet.html',{
+      'username':user_screenname,
+      'tweet':tweet
+    })
 
 def details(request):
     return HttpResponse("You're looking at our contact page.")

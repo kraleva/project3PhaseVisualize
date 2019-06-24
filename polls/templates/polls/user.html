@@ -1,3 +1,5 @@
+{% load static %}
+<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
 <form  method="GET">
  {% csrf_token %}
  {{form}}
@@ -61,7 +63,7 @@
     <ul>
     {% for tweet in tweets %}
         <div class="user_tweets">    
-        <li><a href="{%url 'tweets' tweet.tweet_id %}">{{ tweet.tweet }}</a></li>
+        <li><a href="{%url 'tweet' user.screenname tweet.tweet_id %}">{{ tweet.tweet }}</a></li>
         </div>
     {% endfor %}
     </ul>

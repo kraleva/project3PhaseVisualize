@@ -9,7 +9,7 @@ urlpatterns = [
     path('details/', views.details, name='details'),
     path('<str:user_screenname>/', views.users, name='user'),
     # ex: /polls/5/results/
-    path('<str:user_screenname>/tweets/', views.tweets, name='tweets'),
+    path('<str:user_screenname>/<int:tweet_id>/', views.tweet, name='tweet'),
     # ex: /polls/5/vote/
 ]
 

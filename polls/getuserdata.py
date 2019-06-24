@@ -44,6 +44,10 @@ def getDates(user_attributes):
   else:
     return []
 
+def getTweet(tweet_id):
+  tweet = Tweet.objects.filter(tweet_id = str(tweet_id)).values()
+  return tweet
+
 def getMarrige(user_attributes):
   if(len(user_attributes)>0):
     #relationships = Relationship.objects.filter(user1_id = user_attributes[0]['user_id'],typeofrelationship='Single') | Relationship.objects.filter(user2_id = user_attributes[0]['user_id'],typeofrelationship='Signle') 
