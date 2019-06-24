@@ -17,6 +17,22 @@
 <a> lastdate: {{age}}</a>
 <br>
 <a> income: {{user.statuses}}</a>
+<br><br>
+{% if user.hobby1 %}
+  <a> Hobby 1: {{user.hobby1}}</a>
+{% endif %}
+<br>
+{% if user.hobby2 %}
+  <a> Hobby 2: {{user.hobby2}}</a>
+{% endif %}
+{% if dates %}
+  <div class="datelist">
+  <p>Dates:<p>
+  {% for date in dates %}
+      <li><a href="{%url 'user' date.screenname %}">{{ date.screenname}}</a></li>
+  {% endfor %}
+  </div>
+{% endif %}
 </div>
 <div class="fanlist">
 <p>Fans</p>

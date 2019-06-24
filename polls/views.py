@@ -6,14 +6,14 @@ from django.db.models import Q
 from . forms import NameForm
 from django import forms
 from datetime import datetime
-from . getuserdata import getTweets,getDate, getFans
+from . getuserdata import getTweets,getDate, getFans,getDates
 
 def index(request):
   if request.method == 'GET':
     query = request.GET.get('screenname')
     form = NameForm(request.GET)
     if query:
-      latest_user_list = User.objects.filter(screenname__startswith=str(query))
+      latest_user_list = User.objects.filter(screenname__icontains=str(query))
       context = {
         'latest_user_list':[],
         'searcheduser': latest_user_list,
@@ -42,7 +42,9 @@ def users(request, user_screenname):
           tweets = getTweets(user_attributes)
           age = getDate(tweets)
           fans = getFans(user_attributes)
+          dates = getDates(user_attributes)
           return render(request, 'polls/user.html', {
+          'dates': dates,
           'tweets': tweets,
           'user': user_attributes[0],
           'followers': fans,
