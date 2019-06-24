@@ -33,8 +33,9 @@ def getDates(user_attributes):
     user1relationships = []
     if(len(relationshipsuser1)>0):
       for relationship in relationshipsuser1:
-        userrelationship = User.objects.filter(user_id = relationship['user2_id']).values()
-        user1relationships.append(userrelationship[0])
+        if relationship['user1_id'] != relationship['user2_id']:
+          userrelationship = User.objects.filter(user_id = relationship['user2_id']).values()
+          user1relationships.append(userrelationship[0])
     if(len(relationshipsuser2)>0):
       for relationship in relationshipsuser2:
         userrelationship = User.objects.filter(user_id = relationship['user1_id']).values()
@@ -52,12 +53,13 @@ def getMarrige(user_attributes):
   if(len(user_attributes)>0):
     #relationships = Relationship.objects.filter(user1_id = user_attributes[0]['user_id'],typeofrelationship='Single') | Relationship.objects.filter(user2_id = user_attributes[0]['user_id'],typeofrelationship='Signle') 
     relationshipsuser1 = Relationship.objects.filter(user1_id = user_attributes[0]['user_id'],typeofrelationship='Married').values()
-    relationshipsuser2 = Relationship.objects.filter(user2_id = user_attributes[0]['user_id'],typeofrelationship='Married').values()
     userrelationships = []
+    relationshipsuser2 = Relationship.objects.filter(user2_id = user_attributes[0]['user_id'],typeofrelationship='Married').values()
     if(len(relationshipsuser1)>0):
       for relationship in relationshipsuser1:
-        userrelationship = User.objects.filter(user_id = relationship['user2_id']).values()
-        userrelationships.append(userrelationship[0])
+        if relationship['user1_id'] != relationship['user2_id']:
+          userrelationship = User.objects.filter(user_id = relationship['user2_id']).values()
+          userrelationships.append(userrelationship[0])
     if(len(relationshipsuser2)>0):
       for relationship in relationshipsuser2:
         userrelationship = User.objects.filter(user_id = relationship['user1_id']).values()

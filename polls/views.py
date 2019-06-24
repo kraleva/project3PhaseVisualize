@@ -27,15 +27,23 @@ def index(request):
       }
     return render(request,'polls/index.html',context)
 
+def queries(request):
+  context = {}
+  return render(request,'polls/queries.html',context)
+
 def users(request, user_screenname):
     try:
         query = request.GET.get('screenname')
         form = NameForm(request.GET)
         if query:
           #if do nothing
-          latest_user_list = User.objects.filter(screenname=str(query))
-          if len(latest_user_list)>0:
-            return redirect("http://localhost:8000/"+latest_user_list[0].screenname)
+          latest_user_list = User.objects.filter(screenname__icontains=str(query))
+          context = {
+            'latest_user_list':[],
+            'searcheduser': latest_user_list,
+            'form': form
+          }
+          return render(request,'polls/index.html',context) 
         else:
           user = User.objects.filter(screenname=str(user_screenname))
           user_attributes = user.values()
@@ -64,4 +72,4 @@ def tweet(request,user_screenname,tweet_id):
     })
 
 def details(request):
-    return HttpResponse("You're looking at our contact page.")
+    return render(request,'polls/details.html')

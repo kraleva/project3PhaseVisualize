@@ -1,5 +1,12 @@
+<!-- main.html.j2 -->
+<!DOCTYPE html>
+<html>
 {% load static %}
+<head>
 <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+</head>
+<body>
+{% include "./navigation.html" %}
 <form  method="GET">
  {% csrf_token %}
  {{form}}
@@ -58,6 +65,7 @@
     </div>
 {% endif %}
 </div>
+<h3>Tweets: </h3>
 {% if tweets %}
     <div class="tweet_list">
     <ul>
@@ -73,3 +81,5 @@
     <p>No tweets are available.</p>
     </div>
 {% endif %}
+</body>
+</html>

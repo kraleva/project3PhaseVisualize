@@ -1,11 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
 {% load static %}
 <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
-<h1>List of all users</h1>
-<form  method="GET">
- {% csrf_token %}
- {{form}}
- <input type="submit" class="btn btn-primary" value="submit">
-</form>
+</head>
+<body>
+{% include "./navigation.html" %}
 {% if searcheduser %}
   <div class="user_list">
     {% for user in searcheduser %}
@@ -14,6 +14,7 @@
    </div>
    {% endfor %}
 {% elif latest_user_list %}
+    <h1>List of all users</h1>
     <div class="user_list">
     <ul>
     {% for user in latest_user_list %}
@@ -25,6 +26,8 @@
     </div>
 {% else %}
     <div class="user_list">
-    <p>No users are available.</p>
+    <p>No such user found</p>
     </div>
 {% endif %}
+</body>
+</html>

@@ -1,0 +1,23 @@
+<nav class="navbar navbar-expand-lg navbar-light border border-dark rounded" style = "background-color: #ef8191;">
+    <a class="navbar-brand">Mini Facebook</a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+          <li><a href="/" class="nav-link active">Start Page</a></li>
+          <li class="nav-item"><a class="nav-link" href="/details">Group info</a></li>
+          <li class="nav-item"><a class="nav-link" href="/queries">Queries</a></li>
+    </ul>
+    <form action"/" class = "form-inline my-2 my-lg-0" method="GET">
+     {% csrf_token %}
+     {{form}}
+     <input class="btn btn-outline-dark my-2 my-sm-0" type="submit" class="btn btn-primary" value="submit">
+    </form>
+    </div>
+</nav>
+
+<script>
+$('.nav.navbar-nav > li').on('click', function (e) {
+    e.preventDefault();
+    $('.nav.navbar-nav > li').removeClass('active');
+    $(this).addClass('active');
+});
+</script>
