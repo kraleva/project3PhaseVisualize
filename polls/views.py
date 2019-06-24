@@ -6,7 +6,7 @@ from django.db.models import Q
 from . forms import NameForm
 from django import forms
 from datetime import datetime
-from . getuserdata import getTweets,getDate, getFans,getDates, getMarrige,getTweet
+from . getuserdata import checkforQuery,getTweets,getDate, getFans,getDates, getMarrige,getTweet
 
 def index(request):
   if request.method == 'GET':
@@ -28,8 +28,11 @@ def index(request):
     return render(request,'polls/index.html',context)
 
 def queries(request):
-  context = {}
-  return render(request,'polls/queries.html',context)
+  context = checkforQuery(request)
+  if 'searcheduser' in context:
+    return render(request,'polls/index.html',context)
+  else:
+    return render(request,'polls/queries.html',context)
 
 def users(request, user_screenname):
     try:
@@ -72,4 +75,8 @@ def tweet(request,user_screenname,tweet_id):
     })
 
 def details(request):
-    return render(request,'polls/details.html')
+  context = checkforQuery(request)
+  if 'searcheduser' in context:
+    return render(request,'polls/index.html',context)
+  else:
+    return render(request,'polls/details.html',context)

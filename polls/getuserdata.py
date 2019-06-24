@@ -1,6 +1,8 @@
 from .models import User,Tweet,Following,Relationship
 from datetime import datetime
 from itertools import chain
+from . forms import NameForm
+from django.shortcuts import render
 
 def getTweets(user_attributes):
   if(len(user_attributes)):
@@ -10,6 +12,24 @@ def getTweets(user_attributes):
           return tweetordered.values()
   else:
     return []
+
+def checkforQuery(request):
+  query = request.GET.get('screenname')
+  form = NameForm(request.GET)
+  if query:
+    #if do nothing
+    latest_user_list = User.objects.filter(screenname__icontains=str(query))
+    context = {
+      'latest_user_list':[],
+      'searcheduser': latest_user_list,
+      'form': form
+    }
+    return context 
+  else:
+    context = {
+      'form':form
+    }
+    return context 
 
 def getDate(tweets):
   if len(tweets)>0:
