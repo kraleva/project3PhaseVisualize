@@ -33,6 +33,14 @@
   {% endfor %}
   </div>
 {% endif %}
+{% if marriges %}
+  <div class="marrigelist">
+  <p>Marriges:<p>
+  {% for marrige in marriges %}
+      <li><a href="{%url 'user' marrige.screenname %}">{{ marrige.screenname}}</a></li>
+  {% endfor %}
+  </div>
+{% endif %}
 </div>
 <div class="fanlist">
 <p>Fans</p>

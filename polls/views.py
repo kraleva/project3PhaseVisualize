@@ -6,7 +6,7 @@ from django.db.models import Q
 from . forms import NameForm
 from django import forms
 from datetime import datetime
-from . getuserdata import getTweets,getDate, getFans,getDates
+from . getuserdata import getTweets,getDate, getFans,getDates, getMarrige
 
 def index(request):
   if request.method == 'GET':
@@ -43,9 +43,11 @@ def users(request, user_screenname):
           age = getDate(tweets)
           fans = getFans(user_attributes)
           dates = getDates(user_attributes)
+          marriges = getMarrige(user_attributes)
           return render(request, 'polls/user.html', {
           'dates': dates,
           'tweets': tweets,
+          'marriges':marriges,
           'user': user_attributes[0],
           'followers': fans,
           'age': age,

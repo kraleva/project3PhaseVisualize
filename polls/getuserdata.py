@@ -44,6 +44,25 @@ def getDates(user_attributes):
   else:
     return []
 
+def getMarrige(user_attributes):
+  if(len(user_attributes)>0):
+    #relationships = Relationship.objects.filter(user1_id = user_attributes[0]['user_id'],typeofrelationship='Single') | Relationship.objects.filter(user2_id = user_attributes[0]['user_id'],typeofrelationship='Signle') 
+    relationshipsuser1 = Relationship.objects.filter(user1_id = user_attributes[0]['user_id'],typeofrelationship='Married').values()
+    relationshipsuser2 = Relationship.objects.filter(user2_id = user_attributes[0]['user_id'],typeofrelationship='Married').values()
+    userrelationships = []
+    if(len(relationshipsuser1)>0):
+      for relationship in relationshipsuser1:
+        userrelationship = User.objects.filter(user_id = relationship['user2_id']).values()
+        userrelationships.append(userrelationship[0])
+    if(len(relationshipsuser2)>0):
+      for relationship in relationshipsuser2:
+        userrelationship = User.objects.filter(user_id = relationship['user1_id']).values()
+        userrelationships.append(userrelationship[0])
+    result = list(chain(relationshipsuser1,relationshipsuser2))
+    return userrelationships
+  else:
+    return []
+
 def getFans(user_attributes):
   user_id = user_attributes[0]['user_id']
           #followers = Following.objects.filter(user=user_id).values()
