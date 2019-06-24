@@ -1,20 +1,5 @@
-<!-- main.html.j2 -->
-<!DOCTYPE html>
-<html>
-{% load static %}
-<head>
-<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
-</head>
-<body>
+
 {% include "./navigation.html" %}
-<form  method="GET">
- {% csrf_token %}
- {{form}}
- <input type="submit" value="submit">
-</form>
-<form action="http://localhost:8000">
-    <input type="submit" value="Go back to users" />
-</form>
 <div class="information">
 <h2>{{user.screenname}}</h2>
 {% if user.location%}
@@ -25,7 +10,7 @@
 <br>
 <a> lastdate: {{age}}</a>
 <br>
-<a> income: {{user.statuses}}</a>
+<a> income: {{income}}</a>
 <br><br>
 {% if user.hobby1 %}
   <a> Hobby 1: {{user.hobby1}}</a>
@@ -81,5 +66,6 @@
     <p>No tweets are available.</p>
     </div>
 {% endif %}
+</div>
 </body>
 </html>

@@ -17,18 +17,21 @@ def index(request):
       context = {
         'latest_user_list':[],
         'searcheduser': latest_user_list,
-        'form': form
+        'form': form,
+        'nbar': 'start'
       }
     else:
       latest_user_list = User.objects.all()
       context = {
         'latest_user_list':latest_user_list,
-        'form': form
+        'form': form,
+        'nbar': 'start'
       }
     return render(request,'polls/index.html',context)
 
 def queries(request):
   context = checkforQuery(request)
+  context['nbar']='queries'
   if 'searcheduser' in context:
     return render(request,'polls/index.html',context)
   else:
@@ -51,6 +54,7 @@ def users(request, user_screenname):
           user = User.objects.filter(screenname=str(user_screenname))
           user_attributes = user.values()
           tweets = getTweets(user_attributes)
+          income = len(tweets)
           age = getDate(tweets)
           fans = getFans(user_attributes)
           dates = getDates(user_attributes)
@@ -59,6 +63,7 @@ def users(request, user_screenname):
           'dates': dates,
           'tweets': tweets,
           'marriges':marriges,
+          'income':income,
           'user': user_attributes[0],
           'followers': fans,
           'age': age,
@@ -69,13 +74,17 @@ def users(request, user_screenname):
 
 def tweet(request,user_screenname,tweet_id):
     tweet = getTweet(tweet_id)
-    return render(request,'polls/tweet.html',{
-      'username':user_screenname,
-      'tweet':tweet
-    })
+    context = checkforQuery(request)
+    if 'searcheduser' in context:
+      return render(request,'polls/index.html',context)
+    else:
+      context['username'] = user_screenname
+      context['tweet']=tweet
+      return render(request,'polls/tweet.html',context)
 
 def details(request):
   context = checkforQuery(request)
+  context['nbar']='details'
   if 'searcheduser' in context:
     return render(request,'polls/index.html',context)
   else:

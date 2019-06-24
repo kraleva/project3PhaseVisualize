@@ -1,0 +1,31 @@
+#topheader .navbar-nav li > a {
+	text-transform: capitalize;
+	color: #333;
+	transition: background-color .2s, 
+  color .2s;
+	&:hover,
+	&:focus {
+		background-color: #333;
+		color: #fff;
+	}
+}
+
+#topheader .navbar-brand  {
+  font-family: "Times New Roman", Times, serif;
+  text-align: center;
+  color: #28050f;
+  background-color: rgba(249, 188, 220,0.5);
+  width: 200px;
+  border-radius: 20px;
+  direction: rtl
+}
+
+#topheader .navbar-nav li.active > a {
+	background-color: #c64d5b;
+	color: #fff;
+  border-radius: 25px;
+}
+
+#content {
+  padding-top: 25px;
+}

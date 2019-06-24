@@ -1,12 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-{% load static %}
-<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
-</head>
-<body>
+
 {% include "./navigation.html" %}
-<h1>Tweet von {{username}}</h1>
-{{tweet}}
+<h1>Post von {{username}}</h1>
+{% for tweet1 in tweet%}
+{{tweet1.tweet}}
+{% endfor %}
+</div>
 </body>
 </html>

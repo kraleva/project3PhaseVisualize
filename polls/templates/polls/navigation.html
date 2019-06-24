@@ -1,10 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% load static %}
+<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+<link href="{% static 'css/navbar.css' %}" rel="stylesheet">
+<script src="{% static 'js/jquery-3.4.1.min.js' %}" type="text/javascript"></script>
+</head>
+<body>
+<div id="topheader">
 <nav class="navbar navbar-expand-lg navbar-light border border-dark rounded" style = "background-color: #ef8191;">
     <a class="navbar-brand">Mini Facebook</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-          <li><a href="/" class="nav-link active">Start Page</a></li>
-          <li class="nav-item"><a class="nav-link" href="/details">Group info</a></li>
-          <li class="nav-item"><a class="nav-link" href="/queries">Queries</a></li>
+          <li class="nav-item {% if nbar == 'start' %}active{% endif %}"><a href="/" class="nav-link">Start Page</a></li>
+          <li class="nav-item {% if nbar == 'details' %}active{% endif %}"><a class="nav-link" href="/details">Group info</a></li>
+          <li class="nav-item {% if nbar == 'queries' %}active{% endif %}"><a class="nav-link" href="/queries">Queries</a></li>
     </ul>
     <form action"/" class = "form-inline my-2 my-lg-0" method="GET">
      {% csrf_token %}
@@ -13,11 +23,12 @@
     </form>
     </div>
 </nav>
+</div>
 
 <script>
-$('.nav.navbar-nav > li').on('click', function (e) {
-    e.preventDefault();
-    $('.nav.navbar-nav > li').removeClass('active');
-    $(this).addClass('active');
+$( '#topheader .navbar-nav a' ).on( 'click', function () {
+	$( '#topheader .navbar-nav' ).find( 'li.active' ).removeClass( 'active' );
+	$( this ).parent( 'li' ).addClass( 'active' );
 });
 </script>
+<div id="content">
