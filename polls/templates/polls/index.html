@@ -1,18 +1,16 @@
 {% include "./navigation.html" %}
-{% if searcheduser %}
-  <div class="user_list">
-    {% for user in searcheduser %}
-    <div class="user_row">
-    <li><a href="{%url 'user' user.screenname %}">{{ user.screenname }}</a></li>
-   </div>
-   {% endfor %}
-{% elif latest_user_list %}
+{% if latest_user_list %}
+    {% if isall == 'true' %}
     <h1>List of all users</h1>
     <div class="user_list">
+    {% else %}
+    <h1>List users</h1>
+    <div class="user_search">
+    {% endif %}
     <ul>
     {% for user in latest_user_list %}
-        <div class="user_row">    
-        <li><a href="{%url 'user' user.screenname %}">{{ user.screenname }}</a></li>
+        <div class="list-group">    
+        <li><a href="{%url 'user' user.screenname %}" class="list-group-item list-group-item-action">{{ user.screenname }}</a></li>
         </div>
     {% endfor %}
     </ul>
@@ -23,5 +21,6 @@
     </div>
 {% endif %}
 </div>
+{% include "./pagination.html"%}
 </body>
 </html>

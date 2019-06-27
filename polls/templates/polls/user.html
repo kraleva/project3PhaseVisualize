@@ -1,24 +1,33 @@
 
 {% include "./navigation.html" %}
-<div class="information">
+<div class="row">
+<div class="col-md-6 img">
+      <img src="https://bbcamp.org/wp-content/uploads/2016/08/fb-logo-pink.png"  alt="" class="img-rounded">
+</div>
+<div class="col-md-6 details">
+      <blockquote>
 <h2>{{user.screenname}}</h2>
 {% if user.location%}
-  <a>Location: {{user.location}}</a>
+   <small><cite title="Source Title">Location: {{user.location}}<i class="icon-map-marker"></i></cite></small>
   <br>
 {% endif %}
-<a> ID: {{user.user_id}}</a>
+<h4 class="white"><i class="fa fa-twitter"></i> ID: {{user.user_id}}<i class="icon-map-marker"></i></cite></small>
 <br>
-<a> lastdate: {{age}}</a>
+ <small><cite title="Source Title"> Age: {{age}}<i class="icon-map-marker"></i></cite></small>
 <br>
-<a> income: {{income}}</a>
+ <small><cite title="Source Title"> income: {{income}}<i class="icon-map-marker"></i></cite></small>
 <br><br>
 {% if user.hobby1 %}
-  <a> Hobby 1: {{user.hobby1}}</a>
+   <small><cite title="Source Title"> Hobby 1: {{user.hobby1}}<i class="icon-map-marker"></i></cite></small>
 {% endif %}
 <br>
 {% if user.hobby2 %}
-  <a> Hobby 2: {{user.hobby2}}</a>
+   <small><cite title="Source Title"> Hobby 2: {{user.hobby2}}<i class="icon-map-marker"></i></cite></small>
 {% endif %}
+  </blockquote>
+</div>
+</div>
+</div>
 {% if dates %}
   <div class="datelist">
   <p>Dates:<p>
@@ -69,3 +78,20 @@
 </div>
 </body>
 </html>
+  <div class="row">
+    <div class="col-md-6 img">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvzOpl3-kqfNbPcA_u_qEZcSuvu5Je4Ce_FkTMMjxhB-J1wWin-Q"  alt="" class="img-rounded">
+    </div>
+    <div class="col-md-6 details">
+      <blockquote>
+        <h5>Fiona Gallagher</h5>
+        <small><cite title="Source Title">Chicago, United States of America  <i class="icon-map-marker"></i></cite></small>
+      </blockquote>
+      <p>
+        fionagallager@shameless.com <br>
+        www.bootsnipp.com <br>
+        June 18, 1990
+      </p>
+    </div>
+  </div>
+</div>

@@ -20,6 +20,37 @@
   direction: rtl
 }
 
+#topheader .navbar-nav li > a:hover {
+  width: 100% !important;
+  color: rgb(240, 199, 204);
+  background-color: #c95d6b;
+  border-radius: 20px;
+}
+
+.user_list li > a{
+  margin: center;
+  width: 90%;
+}
+
+.user_list li > a:hover{
+  background-color:  #c95d6b;
+  color: rgb(240, 199, 204);
+}
+
+.user_list li {
+  text-align: center;
+  list-style-type: none;
+}
+
+.user_search li > a{
+  margin: auto;
+  width: 50%;
+}
+.user_search li {
+  text-align: center;
+  list-style-type: none;
+}
+
 #topheader .navbar-nav li.active > a {
 	background-color: #c64d5b;
 	color: #fff;
@@ -28,4 +59,47 @@
 
 #content {
   padding-top: 25px;
+}
+
+.pagination li.active {
+  background-color: #c64d5b;
+  border:#d200f7;
+}
+
+.user_list {
+  align-items: center;
+  column-count: 2;
+  column-gap: 10px;
+}
+
+.pagination{
+  align-self: center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  margin: auto;
+  width: 45%;
+  padding-bottom: 50px;
+}
+
+.pagination li > a{
+  color: #333
+}
+
+.pagination li:hover {
+  background-color: rgba(249, 188, 220,0.5);
+}
+
+.container{
+    padding:5%;
+}
+.container .img{
+    text-align:center;
+}
+.container .details{
+    border-left:3px solid #ded4da;
+}
+.container .details p{
+    font-size:15px;
+    font-weight:bold;
 }

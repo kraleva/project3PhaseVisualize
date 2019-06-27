@@ -1,0 +1,16 @@
+<nav aria-label="Page">
+    <ul class="pagination">
+        {% if latest_user_list.has_previous %}
+            <li class="list-group-item"><a href="?page=1">&laquo; first</a></li>
+             <li class="list-group-item"><a href="?page={{ latest_user_list.previous_page_number }}">previous</a></li>
+             <li class="list-group-item"><a href="?page={{ latest_user_list.previous_page_number }}">{{latest_user_list.previous_page_number}}</a></li>
+        {% endif %}
+            <li class="list-group-item active">{{latest_user_list.number}}</a></li>
+            
+        {% if latest_user_list.has_next %}
+            <li class="list-group-item"><a href="?page={{ latest_user_list.next_page_number}}">{{latest_user_list.next_page_number}}</a></li>
+            <li class="list-group-item"><a href="?page={{ latest_user_list.next_page_number}}">next</a></li>
+             <li class="list-group-item"><a href="?page={{ latest_user_list.paginator.num_pages }}">last &raquo;</a></li>
+        {% endif %}
+        </ul>
+</nav>

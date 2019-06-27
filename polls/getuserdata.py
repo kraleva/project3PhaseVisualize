@@ -3,12 +3,13 @@ from datetime import datetime
 from itertools import chain
 from . forms import NameForm
 from django.shortcuts import render
+from . querries import paginate
 
 def getTweets(user_attributes):
   if(len(user_attributes)):
           #print(user_attributes[0]['screenname'])
           tweets = Tweet.objects.filter(user=user_attributes[0]['user_id'])
-          tweetordered = tweets.order_by('createdat')
+          tweetordered = tweets.order_by('-createdat')
           return tweetordered.values()
   else:
     return []
@@ -19,21 +20,23 @@ def checkforQuery(request):
   if query:
     #if do nothing
     latest_user_list = User.objects.filter(screenname__icontains=str(query))
+    userpage = paginate(latest_user_list,request)
     context = {
-      'latest_user_list':[],
-      'searcheduser': latest_user_list,
+      'latest_user_list':userpage,
       'form': form
     }
+  
     return context 
   else:
     context = {
-      'form':form
+      'form':form,
+      'isall': 'true'
     }
     return context 
 
 def getDate(tweets):
   if len(tweets)>0:
-            borndate = tweets[0]['createdat']
+            borndate = tweets[len(tweets)-1]['createdat']
             d0 = datetime.now().date()
             age = d0 - borndate
             years = age.days//365
@@ -101,3 +104,7 @@ def getFans(user_attributes):
      newuser = User.objects.filter(user_id = follower['follower_id']).values()
      fans.append(newuser[0])
   return fans
+
+      
+
+

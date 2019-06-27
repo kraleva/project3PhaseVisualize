@@ -7,6 +7,7 @@ from . forms import NameForm
 from django import forms
 from datetime import datetime
 from . getuserdata import checkforQuery,getTweets,getDate, getFans,getDates, getMarrige,getTweet
+from . querries import paginate
 
 def index(request):
   if request.method == 'GET':
@@ -14,17 +15,19 @@ def index(request):
     form = NameForm(request.GET)
     if query:
       latest_user_list = User.objects.filter(screenname__icontains=str(query))
+      userpage = paginate(latest_user_list,request)
       context = {
-        'latest_user_list':[],
-        'searcheduser': latest_user_list,
+        'latest_user_list': userpage,
         'form': form,
         'nbar': 'start'
       }
     else:
       latest_user_list = User.objects.all()
+      userpage = paginate(latest_user_list,request)
       context = {
-        'latest_user_list':latest_user_list,
+        'latest_user_list':userpage,
         'form': form,
+        'isall': 'true',
         'nbar': 'start'
       }
     return render(request,'polls/index.html',context)
@@ -44,9 +47,9 @@ def users(request, user_screenname):
         if query:
           #if do nothing
           latest_user_list = User.objects.filter(screenname__icontains=str(query))
+          userpage = paginate(latest_user_list,request)
           context = {
-            'latest_user_list':[],
-            'searcheduser': latest_user_list,
+            'latest_user_list':userpage,
             'form': form
           }
           return render(request,'polls/index.html',context) 
@@ -80,6 +83,7 @@ def tweet(request,user_screenname,tweet_id):
     else:
       context['username'] = user_screenname
       context['tweet']=tweet
+      context['age'] = tweet[0]['createdat']
       return render(request,'polls/tweet.html',context)
 
 def details(request):
