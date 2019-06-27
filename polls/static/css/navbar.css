@@ -61,6 +61,10 @@
   padding-top: 25px;
 }
 
+html,body{
+  max-width: 100%;
+}
+
 .pagination li.active {
   background-color: #c64d5b;
   border:#d200f7;
@@ -102,4 +106,68 @@
 .container .details p{
     font-size:15px;
     font-weight:bold;
+}
+
+.fanlist {
+  width: 200px;
+  align-items: center;
+  column-count: 7;
+  column-gap: 230px;
+  column-fill: auto;
+  list-style-type: none;
+}
+ 
+.tweet_list{
+  width:90%;
+}
+
+.fanlist h2 {
+  font: 400 40px/1.5 Helvetica, Verdana, sans-serif;
+  margin-bottom: 20px;
+  color: #c64d5b;
+}
+ 
+.fanlist ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ 
+.fanlist  li {
+  font: 200 20px/1.5 Helvetica, Verdana, sans-serif;
+  border-bottom: 1px solid #ccc;
+}
+
+#buttontoreturn {
+  background-color: #fff;
+  border:solid #c64d5b;
+  color: #c64d5b;
+  margin-left: 50px;
+}
+#buttontoreturn:hover{
+  background-color: #c64d5b;
+  margin-left:50px;
+  color: #fff;
+}
+ 
+.fanlist ul >li:last-child {
+  border: none;
+}
+ 
+.fanlist  li > a {
+  text-decoration: none;
+  color: #000;
+  display: block;
+  width: 200px;
+ 
+  -webkit-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -moz-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -o-transition: font-size 0.3s ease, background-color 0.3s ease;
+  -ms-transition: font-size 0.3s ease, background-color 0.3s ease;
+  transition: font-size 0.3s ease, background-color 0.3s ease;
+}
+ 
+.fanlist li > a:hover {
+  font-size: 30px;
+  background: #f6f6f6;
 }

@@ -35,7 +35,7 @@ def index(request):
 def queries(request):
   context = checkforQuery(request)
   context['nbar']='queries'
-  if 'searcheduser' in context:
+  if 'latest_user_list' in context:
     return render(request,'polls/index.html',context)
   else:
     return render(request,'polls/queries.html',context)
@@ -78,7 +78,7 @@ def users(request, user_screenname):
 def tweet(request,user_screenname,tweet_id):
     tweet = getTweet(tweet_id)
     context = checkforQuery(request)
-    if 'searcheduser' in context:
+    if 'latest_user_list' in context:
       return render(request,'polls/index.html',context)
     else:
       context['username'] = user_screenname
@@ -89,7 +89,7 @@ def tweet(request,user_screenname,tweet_id):
 def details(request):
   context = checkforQuery(request)
   context['nbar']='details'
-  if 'searcheduser' in context:
+  if 'latest_user_list' in context:
     return render(request,'polls/index.html',context)
   else:
     return render(request,'polls/details.html',context)

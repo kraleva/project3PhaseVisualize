@@ -29,43 +29,42 @@
 </div>
 </div>
 {% if dates %}
-  <div class="datelist">
-  <p>Dates:<p>
+  <div class="fanlist">
+  <h2>Dates:</h2>
   {% for date in dates %}
       <li><a href="{%url 'user' date.screenname %}">{{ date.screenname}}</a></li>
   {% endfor %}
   </div>
 {% endif %}
+<hr>
 {% if marriges %}
-  <div class="marrigelist">
-  <p>Marriges:<p>
+  <div class="fanlist">
+  <h2>Marriges:</h2>
   {% for marrige in marriges %}
       <li><a href="{%url 'user' marrige.screenname %}">{{ marrige.screenname}}</a></li>
   {% endfor %}
   </div>
 {% endif %}
-</div>
-<div class="fanlist">
-<p>Fans</p>
+<hr>
 {% if followers %}
-    <div class="fan_list">
+  <div class="fanlist">
+    <h2>Fans:</h2>
+    <ul>
     {% for follower in followers %}
       <li><a href="{%url 'user' follower.screenname %}">{{ follower.screenname}}</a></li>
-    </div>
+    </ul>
     {% endfor %}
-{% else %}
-    <div class="fan_list">
-    <p>No followers yet.</p>
     </div>
+{% else %}
+    <h2>No followers yet.</h2>
 {% endif %}
-</div>
-<h3>Tweets: </h3>
+<h3>Posts: </h3>
 {% if tweets %}
     <div class="tweet_list">
-    <ul>
+    <ul class="list-group">
     {% for tweet in tweets %}
         <div class="user_tweets">    
-        <li><a href="{%url 'tweet' user.screenname tweet.tweet_id %}">{{ tweet.tweet }}</a></li>
+        <li ><a href="{%url 'tweet' user.screenname tweet.tweet_id %}" class="list-group-item list-group-item-action">{{ tweet.tweet }}</a></li>
         </div>
     {% endfor %}
     </ul>
@@ -78,20 +77,3 @@
 </div>
 </body>
 </html>
-  <div class="row">
-    <div class="col-md-6 img">
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvzOpl3-kqfNbPcA_u_qEZcSuvu5Je4Ce_FkTMMjxhB-J1wWin-Q"  alt="" class="img-rounded">
-    </div>
-    <div class="col-md-6 details">
-      <blockquote>
-        <h5>Fiona Gallagher</h5>
-        <small><cite title="Source Title">Chicago, United States of America  <i class="icon-map-marker"></i></cite></small>
-      </blockquote>
-      <p>
-        fionagallager@shameless.com <br>
-        www.bootsnipp.com <br>
-        June 18, 1990
-      </p>
-    </div>
-  </div>
-</div>

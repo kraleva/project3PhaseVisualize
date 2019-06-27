@@ -37,8 +37,8 @@ def checkforQuery(request):
 def getDate(tweets):
   if len(tweets)>0:
             borndate = tweets[len(tweets)-1]['createdat']
-            d0 = datetime.now().date()
-            age = d0 - borndate
+            lastdate = tweets[0]['createdat']
+            age = lastdate - borndate
             years = age.days//365
             if years>0:
               age = str(years) + " years old"
